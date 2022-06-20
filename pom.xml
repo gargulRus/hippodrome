@@ -14,6 +14,8 @@
         <junitVersion>5.8.2</junitVersion>
         <mockitoVersion>4.6.1</mockitoVersion>
         <surefirePluginVersion>2.22.2</surefirePluginVersion>
+        <slf4jVersion>1.7.36</slf4jVersion>
+        <log4jVersion>2.17.2</log4jVersion>
     </properties>
 
     <dependencies>
@@ -50,6 +52,18 @@
             <artifactId>mockito-inline</artifactId>
             <version>${mockitoVersion}</version>
             <scope>test</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4jVersion}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4jVersion}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->

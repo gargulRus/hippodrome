@@ -1,9 +1,16 @@
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+
 public class Main {
 
+    final static Logger logger = LogManager.getLogger(Main.class);
+
     public static void main(String[] args) throws Exception {
+
         List<Horse> horses = List.of(
                 new Horse("Буцефал", 2.4),
                 new Horse("Туз Пик", 2.5),
@@ -15,6 +22,7 @@ public class Main {
         );
         Hippodrome hippodrome = new Hippodrome(horses);
 
+        logger.warn("Hello!");
         for (int i = 0; i < 100; i++) {
             hippodrome.move();
             watch(hippodrome);
