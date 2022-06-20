@@ -57,37 +57,26 @@ public class HorseTest {
     }
 
     @Test
-    public void getName(){
+    public void testGetName(){
         assertEquals(horseName, horseTwoParam.getName());
     }
 
     @Test
-    public void getSpeed(){
+    public void testGetSpeed(){
         assertEquals(speed, horseThreeParam.getSpeed());
     }
 
     @Test
-    public void getDistance(){
+    public void testGetDistance(){
         assertEquals(distance, horseThreeParam.getDistance());
     }
 
     static Stream<Double> argsForTestMoveMethod() {
         return Stream.of(0.1, 20.2, 0.5);
     }
-    @ParameterizedTest
-    @MethodSource("argsForTestMoveMethod")
-    public void moveTestingDistanceCount(Double randDouble){
-        try(MockedStatic<Horse> horseMockedStatic = Mockito.mockStatic(Horse.class)){
-            horseMockedStatic.when(() -> Horse.getRandomDouble(0.2, 0.9)).thenReturn(randDouble);
-            Horse horse = new Horse("test", speed,distance);
-            horse.move();
-            double expectedDistance = distance + speed * randDouble;
-            assertEquals(expectedDistance, horse.getDistance());
-        }
-    }
 
     @Test
-    public void moveTestGetRandomDoubleCall(){
+    public void testGetRandomDoubleCallInMoveMethod(){
         try(MockedStatic<Horse> horseMockedStatic = Mockito.mockStatic(Horse.class)){
             horseMockedStatic.when(() -> Horse.getRandomDouble(0.2, 0.9)).thenReturn(0.2);
             Horse horse = new Horse("test", speed,distance);
@@ -97,4 +86,17 @@ public class HorseTest {
             );
         }
     }
+
+    @ParameterizedTest
+    @MethodSource("argsForTestMoveMethod")
+    public void testingDistanceCountInMoveMethod(Double randDouble){
+        try(MockedStatic<Horse> horseMockedStatic = Mockito.mockStatic(Horse.class)){
+            horseMockedStatic.when(() -> Horse.getRandomDouble(0.2, 0.9)).thenReturn(randDouble);
+            Horse horse = new Horse("test", speed,distance);
+            horse.move();
+            double expectedDistance = distance + speed * randDouble;
+            assertEquals(expectedDistance, horse.getDistance());
+        }
+    }
+
 }
