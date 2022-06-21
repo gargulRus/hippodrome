@@ -33,7 +33,7 @@ public class HippodromeTest {
     }
     private List<Horse> generateMockHorses() {
         List<Horse> generateHorses = new ArrayList<>();
-        for(int i = 0; i < 47; i++) {
+        for(int i = 0; i < 50; i++) {
             generateHorses.add(Mockito.mock(Horse.class, "TestHorse" + i));
         }
         return generateHorses;
