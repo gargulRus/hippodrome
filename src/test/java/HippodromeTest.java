@@ -8,20 +8,19 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class HippodromeTest {
 
     public Hippodrome hippodrome;
     public List<Horse> horses = new ArrayList<>();
-    public List<Horse> mockhorses = new ArrayList<>();
-    Horse mockHorse2 = Mockito.mock(Horse.class, "TestHorse");
+    public List<Horse> mockHorses = new ArrayList<>();
 
     @BeforeAll
     public void init() {
         horses = generateHorses();
-        mockhorses = generateMockHorses();
+        mockHorses = generateMockHorses();
         hippodrome = new Hippodrome(horses);
     }
 
@@ -34,8 +33,8 @@ public class HippodromeTest {
     }
     private List<Horse> generateMockHorses() {
         List<Horse> generateHorses = new ArrayList<>();
-        for(int i = 0; i < 50; i++) {
-            generateHorses.add(mockHorse2);
+        for(int i = 0; i < 47; i++) {
+            generateHorses.add(Mockito.mock(Horse.class, "TestHorse" + i));
         }
         return generateHorses;
     }
@@ -59,10 +58,11 @@ public class HippodromeTest {
 
     @Test
     public void testMove(){
-        Hippodrome mockHippodrome = new Hippodrome(mockhorses);
+        Hippodrome mockHippodrome = new Hippodrome(mockHorses);
         mockHippodrome.move();
-        Mockito.verify(mockHorse2, times(50)).move();
-
+        for(Horse horse : mockHorses) {
+            verify(horse, times(1)).move();
+        }
     }
 
     @Test

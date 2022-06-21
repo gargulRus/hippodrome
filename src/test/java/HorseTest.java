@@ -71,6 +71,11 @@ public class HorseTest {
         assertEquals(distance, horseThreeParam.getDistance());
     }
 
+    @Test
+    public void testGetDistanceZero(){
+        assertEquals(0, horseTwoParam.getDistance());
+    }
+
     static Stream<Double> argsForTestMoveMethod() {
         return Stream.of(0.1, 20.2, 0.5);
     }
@@ -78,7 +83,7 @@ public class HorseTest {
     @Test
     public void testGetRandomDoubleCallInMoveMethod(){
         try(MockedStatic<Horse> horseMockedStatic = Mockito.mockStatic(Horse.class)){
-            horseMockedStatic.when(() -> Horse.getRandomDouble(0.2, 0.9)).thenReturn(0.2);
+            //horseMockedStatic.when(() -> Horse.getRandomDouble(0.2, 0.9)).thenReturn(0.2);
             Horse horse = new Horse("test", speed,distance);
             horse.move();
             horseMockedStatic.verify(
